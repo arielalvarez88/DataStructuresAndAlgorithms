@@ -241,9 +241,9 @@ public class GraphsProblemsTest {
 
 	@Test
 	public void testIsBinarySearch() {
-		Graph g = new Graph(Arrays.asList(n1,n2,n3,n4,n5,n6,n7));
+		Graph g = new Graph(Arrays.asList(n1, n2, n3, n4, n5, n6, n7));
 		g.markAllUnvisited();
-		
+
 		assertTrue(GraphsProblems.isBinarySearch(null) == false);
 		n3.setLeft(n2);
 		n3.setRight(n5);
@@ -258,6 +258,21 @@ public class GraphsProblemsTest {
 		n5.setLeft(n7);
 
 		assertFalse(GraphsProblems.isBinarySearch(n3) == true);
+	}
+
+	@Test
+	public void testGetCommonParent() {
+		n1.setLeft(n2);
+		n1.setLeft(n3);
+		assertTrue(GraphsProblems.getCommonParent(n2, n3) == n1);
+		n2.setRight(n5);
+		n2.setLeft(n4);
+		n4.setRight(n7);
+		;
+		assertTrue(GraphsProblems.getCommonParent(n7, n3) == n1);
+		assertTrue(GraphsProblems.getCommonParent(n5, n7) == n2);
+		assertTrue(GraphsProblems.getCommonParent(n1, n2) == null);
+		assertTrue(GraphsProblems.getCommonParent(n3, n3) == n1);
 	}
 
 }

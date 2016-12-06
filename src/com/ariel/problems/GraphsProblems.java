@@ -307,19 +307,50 @@ public class GraphsProblems {
 		BinaryTreeNode left = n.getLeft(), right = n.getRight();
 		boolean thisNodeIsBinarySearch = true;
 		n.setState(GraphNodeState.VISITED);
-		if(left != null  && left.getValue()>n.getValue()){
+		if (left != null && left.getValue() > n.getValue()) {
 			return false;
 		}
-		if(right != null && right.getValue()<n.getValue()){
+		if (right != null && right.getValue() < n.getValue()) {
 			return false;
 		}
-		if(left != null){
+		if (left != null) {
 			thisNodeIsBinarySearch = thisNodeIsBinarySearch && isBinarySearch(left);
 		}
-		if(right != null){
+		if (right != null) {
 			thisNodeIsBinarySearch = thisNodeIsBinarySearch && isBinarySearch(right);
 		}
 		return thisNodeIsBinarySearch;
 	}
+
+	public static BinaryTreeNode getCommonParent(BinaryTreeNode n1, BinaryTreeNode n2) {
+		HashSet<BinaryTreeNode> nodes = new HashSet<BinaryTreeNode>();
+		BinaryTreeNode p1 = n1, p2 = n2;
+		do {
+			if (p1 != null) {
+				p1 = p1.getParent();
+
+			}
+			if (p2 != null) {
+				p2 = p2.getParent();
+			}
+
+			if (nodes.contains(p1)) {
+				return p1;
+			}
+			if (p1 != null) {
+				nodes.add(p1);
+			}
+			if (nodes.contains(p2)) {
+				return p2;
+			}
+			if (p2 != null) {
+				nodes.add(p2);
+			}
+
+		} while (p1 != null || p2 != null);
+
+		return null;
+	}
+	
 
 }
